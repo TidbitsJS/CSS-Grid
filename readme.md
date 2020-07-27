@@ -65,3 +65,76 @@ Happy with columns, now what about rows? So smart han? Yeah you are right, use `
 I used columns & some rows in my page. But honestly, they are looking like a matrix or table with no space & padding. Seems not so good to me. Okay don't give you up as you have `grid-gap` with you! Yess, it adds padding or space in your rows & columns. Now it's decent no?
 
 > Remember container is to whom you have used `display:grid` property, then by all means it's nothing but `Grid Container` & children of container are `Grid-items`
+
+### 1.2 Implicit Vs Explicit Grid
+
+Now the basic fundamentals are clear, we can dive in further stuff. One of the important thing to know about grid is it's type i.e. Implicit & Explicit. Look below the simple grid creation of a container.
+
+```css
+.container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 200px 400px;
+  grid-template-rows: 50px 100px;
+}
+```
+
+Yeah as you see, we have created two columns of size 200px & 400px using `grid-template-columns` and two rows of size 50px & 100px with help of `grid-template-rows` declaration.
+
+Now that's where the game begins, you declare rows and columns with their size but yet there is another row with different row size. How?
+
+When you declare a grid with specific columns and rows then that's `Explicit Grid` and when you don't, off course it's `Implicit Grid`. In this scenario, after two rows, the automatically generated rows have default size. You can clearly distinguish between implicit and explicit grid with help of Dev Tools. You can do so in firefox in the layouts section. Explicit grid starts & ends with `bold` line while implicit with faint `dash` line.
+
+![Implicit Vs Explicit](./Images/grid.png)
+
+Well in case if you don't want the default size for the implicit grid, then you can use the following properties to obtain desired results.
+
+```css
+.container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 200px 400px;
+  grid-template-rows: 50px 100px;
+  grid-auto-rows: 80px;
+  grid-auto-columns: 100px;
+}
+```
+
+Property named `grid-auto-rows: 80px` adjusts the size of every implicit grid row. One thing to point out, we used `grid-auto-columns` but yet there is no extra specified column out there. Strange, isn't it?
+
+
+### 1.3 Grid AutoFlow
+
+Wondering why `grid-auto-columns` isn't working at all? Then you are at right place. Let's crack this down. Here we go.
+
+When grid is implicit, then whatsoever elements that are out of explicit are automatically generated & placed as row rather a column. Know why? This is all because of `grid-auto-flow` which is by default set to `row`. And hence you didn't see any change in earlier example.
+
+If you change 'grid-auto-flow' to 'column', then you can clearly catch those changes as all of your elements will be arranged column wise. Here is the snippet to get such result
+
+```css
+.container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 100px;
+  grid-template-rows: 100px;
+  grid-auto-flow: column;
+}
+```
+> The `grid-auto-flow` does the same functionality as the `flex-direction` in flexbox. It's completely one's choice to use any of them.  
+
+Ever used instagram? I know it's not even a question worth asking. But why I mentioned gram here is notable. Seen Stroies? Yes, you have. Well you can create a gram story bar using a grid in a few steps without dealing with position and all. How? Pay a look down here.
+
+```css
+.container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 100px;
+  grid-template-rows: 100px;
+  grid-auto-flow: column;
+}
+
+.item {
+  border-radius: 50%;
+}
+```
+Not to forget, you can use flexbox too. Remember, there are many ways to create the same thing. You got this. 
